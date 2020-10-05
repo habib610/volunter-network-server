@@ -3,7 +3,8 @@ const bodyParser = require('body-parser')
 const cors = require('cors');
 const ObjectId = require('mongodb').ObjectId;
 const app = express();
-const pass = 'Tb6vYdXtPK4vAHkg';
+require('dotenv').config();
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -16,7 +17,7 @@ app.get('/', (req, res)=>{
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://volunteer1:Tb6vYdXtPK4vAHkg@cluster0.4zcwe.mongodb.net/volunterNetwork?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.4zcwe.mongodb.net/volunterNetwork?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   const collection = client.db("volunterNetwork").collection("events");
